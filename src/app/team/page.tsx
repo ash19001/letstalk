@@ -17,7 +17,17 @@ export const metadata: Metadata = {
 
 /** The team as people talking: each person's own words in a bubble on the sign's orange. */
 export default async function TeamPage() {
-  const team = await getTeam();
+  const all = await getTeam();
+  // Real people take the wide white bubbles; until more profiles arrive, one example shows how it will look
+  const real = all.filter((m) => !m.sample);
+  const examples = all.filter((m) => m.sample).slice(0, 1);
+  const team: typeof all = [];
+  while (real.length || examples.length) {
+    const r = real.shift();
+    if (r) team.push(r);
+    const e = examples.shift();
+    if (e) team.push(e);
+  }
   return (
     <>
       <SiteHeader />
@@ -25,7 +35,7 @@ export default async function TeamPage() {
       <main id="main" className="pb-[var(--pad)]">
         <PageIntro
           title="Meet the team"
-          lead="The people who open the door, make the tea and cook the Thursday lunch. On Wednesdays a psychologist and a psychiatrist join the men’s club."
+          lead="The people who open the door, make the tea and cook the Thursday lunch."
           action={<BubbleButton href={place.phoneHref}>Call {place.phone}</BubbleButton>}
           picture={{
             src: "/images/world/drake-street-in-rochdale-geograph-org-uk.jpg",
@@ -62,6 +72,11 @@ export default async function TeamPage() {
               );
             })}
           </ul>
+          <div className="wrap mt-[clamp(3rem,6vw,5rem)]">
+            <p className="max-w-[34ch] text-lead font-medium">
+              On Wednesdays a psychologist and a psychiatrist join the men&rsquo;s club.
+            </p>
+          </div>
         </section>
       </main>
       <SiteFooter />

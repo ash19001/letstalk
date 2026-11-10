@@ -32,13 +32,9 @@
   /* motion: Emil Kowalski's curves for interface, expo-out for long reveals */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
   --t-press: 140ms;
   --t-hover: 180ms;
-  --t-ui: 240ms;
-  --t-reveal: 800ms;
   --t-open: 1100ms;
 }
 
@@ -57,10 +53,8 @@
   --color-field-ink: var(--field-ink);
   --color-line: var(--line);
   --font-sans: var(--font-roundo), "Segoe UI", system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --text-small: var(--step-small);
   --text-body: var(--step-body);
   --text-lead: var(--step-lead);
@@ -323,6 +317,17 @@ html {
   }
 }
 
+/* From 768px the header sits on the hero's orange bubble on the home page: rings go ink, and
+   the black Call button turns white on hover and focus instead of orange, so it never vanishes */
+@media (min-width: 768px) {
+  body:has(.hero) > header {
+    --focus: var(--ink);
+  }
+  body:has(.hero) > header .group:is(:hover, :focus-visible) > .bubble {
+    background-color: #fff;
+  }
+}
+
 /* Phone menu: a plain full-screen sheet under the header */
 .menu-sheet {
   display: none;
@@ -351,10 +356,19 @@ html {
    black = today), then the week scrolling sideways under a time column that stays
    put and reaches back to the screen edge. */
 .week-strip {
+  --focus: var(--ink);
   margin-top: clamp(2rem, 4vw, 3rem);
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 0.375rem;
+}
+@media (max-width: 359px) {
+  .week-strip {
+    gap: 0.25rem;
+  }
+  .week-strip-day {
+    font-size: 0.8125rem;
+  }
 }
 .week-strip-day {
   display: grid;
@@ -385,15 +399,27 @@ html {
     color: #fff;
   }
 }
-.cal-scroll {
+.cal-frame {
   --axis: 3.25rem;
   --axis-full: calc(var(--inset) + var(--axis));
   --open-col: 9.5rem;
   --closed-col: 4rem;
-  /* the scroller is the containing block for everything inside it, hidden text included */
   position: relative;
   margin-top: 1.25rem;
   margin-inline: calc(var(--inset) * -1);
+}
+/* the ring is drawn above the sticky time column, which would otherwise cover its left edge */
+.cal-frame:has(> .cal-scroll:focus-visible)::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 1rem;
+  z-index: 5;
+  border: 3px solid var(--field);
+  pointer-events: none;
+}
+.cal-scroll {
+  /* the scroller is the containing block for everything inside it, hidden text included */
+  position: relative;
   padding-inline-end: var(--inset);
   padding-bottom: 1rem;
   overflow-x: auto;
@@ -405,7 +431,7 @@ html {
   scrollbar-color: var(--line) transparent;
 }
 .cal-scroll:focus-visible {
-  outline-offset: -3px;
+  outline: none;
 }
 /* on a phone any day can be scrolled up against the times, Sunday included */
 @media (max-width: 767px) {
@@ -429,11 +455,13 @@ html {
   .week-strip {
     display: none;
   }
-  .cal-scroll {
+  .cal-frame {
     --axis: 3.75rem;
     --axis-full: var(--axis);
     margin-top: clamp(2.25rem, 4vw, 3.5rem);
     margin-inline: 0;
+  }
+  .cal-scroll {
     padding: 0;
     overflow: visible;
   }
@@ -445,6 +473,13 @@ html {
   }
   .cal-days {
     grid-template-columns: var(--cols-fluid);
+  }
+}
+/* narrower desktop columns wrap the titles: give each hour a little more room so a one-hour
+   session (with its "On now" line) still fits its own hour */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .cal {
+    --hour: 7.25rem;
   }
 }
 .cal-axis {
@@ -587,6 +622,22 @@ html {
   background: var(--ink);
   color: #fff;
 }
+.cal-block-on {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+  font-size: var(--step-small);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.cal-block-on::before {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--field);
+}
 /* the line runs behind the blocks, so it never cuts through their words */
 .cal-now {
   position: absolute;
@@ -680,7 +731,7 @@ html {
   padding: calc(1.5rem + var(--zz) / 2) 1.25rem 1.5rem;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-plex-mono), ui-monospace, "Cascadia Mono", monospace;
   font-size: clamp(0.8125rem, 0.7rem + 0.5vw, 0.875rem);
   font-weight: 500;
   line-height: 1.6;
@@ -759,6 +810,18 @@ html {
     }
   }
 }
+@supports (animation-timeline: view()) and (timeline-scope: none) {
+  @media (prefers-reduced-motion: no-preference) and (max-height: 880px) {
+    .receipt {
+      animation-range: entry 100% cover 10%;
+    }
+  }
+  @media (max-height: 720px) {
+    .receipt {
+      animation: none;
+    }
+  }
+}
 @keyframes print {
   from {
     transform: translateY(70%);
@@ -783,8 +846,13 @@ html {
 }
 .map {
   width: 100%;
-  max-width: 44rem;
+  max-width: min(44rem, 62svh);
   justify-self: end;
+}
+@media (max-width: 1023px) {
+  .map {
+    max-width: none;
+  }
 }
 .map-box {
   position: relative;
@@ -841,6 +909,7 @@ html {
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
+  background: var(--field);
   color: var(--ink);
   transition:
     background-color var(--t-hover) ease,
@@ -993,6 +1062,12 @@ html {
   font-size: var(--step-lead);
   font-weight: 500;
   line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.voice-bubble.is-example .voice-quote {
+  font-size: var(--step-lead);
+  font-weight: 600;
+  line-height: 1.15;
   letter-spacing: -0.01em;
 }
 .voice-flag {

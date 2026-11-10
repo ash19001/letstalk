@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { weekInWords } from "@/lib/rota";
 import "./globals.css";
 
 const roundo = localFont({
@@ -17,8 +18,7 @@ export const metadata: Metadata = {
     default: "Let's Talk, Rochdale",
     template: "%s · Let's Talk, Rochdale",
   },
-  description:
-    "A free wellbeing centre in a shop on Drake Street, Rochdale. Women's group on Mondays, English class and men's club on Wednesdays, community lunch on Thursdays, men's meditation on Sundays. No referral, nothing to pay.",
+  description: `A free wellbeing centre in a shop on Drake Street, Rochdale. ${weekInWords()}. No referral, nothing to pay.`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

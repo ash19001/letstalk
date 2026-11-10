@@ -28,7 +28,7 @@ export function SiteFooter() {
       <div className="bg-ink text-white">
         <div className="wrap pb-10 pt-[clamp(3.5rem,6vw,5.5rem)]">
           <div className="grid gap-10 md:grid-cols-12 md:gap-x-[var(--gutter)]">
-            <nav aria-label="Footer" className="flex flex-col text-body md:col-span-4">
+            <nav aria-label="Footer" className="-mt-1.5 flex flex-col text-body md:col-span-4">
               {links.map((l) => (
                 <Link key={l.href} href={l.href} className="link py-1.5 no-underline">
                   {l.label}
@@ -42,10 +42,10 @@ export function SiteFooter() {
                 {place.town} <span className="whitespace-nowrap">{place.postcode}</span>
               </p>
               <p className="mt-4 flex flex-col items-start">
-                <a href={place.phoneHref} className="link py-1.5 no-underline">
+                <a href={place.phoneHref} className="py-1.5 underline">
                   {place.phone}
                 </a>
-                <a href={place.facebook} className="link py-1.5 no-underline">
+                <a href={place.facebook} className="py-1.5 underline">
                   Facebook: Let&rsquo;s Talk &ndash; Find Your Voice
                 </a>
               </p>

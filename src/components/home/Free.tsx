@@ -1,21 +1,32 @@
 import { IBM_Plex_Mono } from "next/font/google";
 import { ReceiptStamp } from "@/components/home/ReceiptStamp";
+import { DAY_NAMES, sessionById } from "@/lib/rota";
 
-/** Only the till receipt is set in this face, so it is loaded here and nowhere else */
+/**
+ * Only the till receipt is set in this face. It is declared here and not preloaded:
+ * the receipt is below the fold, so the face loads when the receipt is drawn and no
+ * other page fetches it. The receipt reads var(--font-plex-mono) directly (see .receipt).
+ */
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["500", "600"],
   variable: "--font-plex-mono",
   display: "swap",
+  preload: false,
 });
+
+const SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+// the days come from the rota, so the receipt follows it if a session moves
+const lunch = sessionById("community-lunch");
+const english = sessionById("english-class");
 
 /** What people can have, as it would print on a till. Every price is the same. */
 const items: { name: string; sub?: string }[] = [
-  { name: "Thursday lunch" },
+  { name: `${DAY_NAMES[lunch.day]} lunch` },
   { name: "Tea, coffee, biscuits" },
-  { name: "Food parcel (Thu)", sub: "Rice, oil, flour, if you need one" },
-  { name: "Warm clothes (Thu)", sub: "While stocks last" },
-  { name: "English class (Wed)" },
+  { name: `Food parcel (${SHORT[lunch.day]})`, sub: "Rice, oil, flour, if you need one" },
+  { name: `Warm clothes (${SHORT[lunch.day]})`, sub: "While stocks last" },
+  { name: `English class (${SHORT[english.day]})` },
   { name: "Someone to talk to" },
 ];
 

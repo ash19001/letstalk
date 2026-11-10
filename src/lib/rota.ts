@@ -6,6 +6,8 @@
  * 2022 listing ("Every Thursday from 12.30 pm to 2 pm").
  */
 
+import { lowerFirst } from "@/lib/text";
+
 export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Sunday, like Date#getDay
 
 export type Session = {
@@ -129,10 +131,32 @@ export const WEEK_ORDER: Weekday[] = [1, 2, 3, 4, 5, 6, 0];
 export const OPEN_DAYS: Weekday[] = WEEK_ORDER.filter((d) => sessions.some((s) => s.day === d));
 export const CLOSED_DAYS: Weekday[] = WEEK_ORDER.filter((d) => !OPEN_DAYS.includes(d));
 
+const andList = (items: string[]) =>
+  items.length > 1 ? `${items.slice(0, -1).join(", ")} and ${items.at(-1)}` : (items[0] ?? "");
+
 /** "Monday, Wednesday, Thursday and Sunday" */
 export function openDaysText(): string {
-  const names = OPEN_DAYS.map((d) => DAY_NAMES[d]);
-  return names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : (names[0] ?? "");
+  return andList(OPEN_DAYS.map((d) => DAY_NAMES[d]));
+}
+
+/** "Women’s group on Mondays, English class and men’s club on Wednesdays, …" */
+export function weekInWords(): string {
+  const parts = OPEN_DAYS.map((d) => {
+    const titles = sessions
+      .filter((s) => s.day === d)
+      .sort((a, b) => a.start.localeCompare(b.start))
+      .map((s) => lowerFirst(s.title));
+    return `${andList(titles)} on ${DAY_NAMES[d]}s`;
+  });
+  const text = andList(parts);
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/** The session with this id; throws if the rota no longer has it, so a renamed id is caught at build time */
+export function sessionById(id: string): Session {
+  const s = sessions.find((x) => x.id === id);
+  if (!s) throw new Error(`No session "${id}" in the rota`);
+  return s;
 }
 
 export const place = {
@@ -150,9 +174,10 @@ export const place = {
   founded: 2019,
 };
 
-/** "11:00" -> "11am", "12:30" -> "12.30pm", "13:00" -> "1pm" */
+/** "11:00" -> "11am", "12:00" -> "midday", "12:30" -> "12.30pm", "13:00" -> "1pm" */
 export function formatTime(hhmm: string): string {
   const [h, m] = hhmm.split(":").map(Number);
+  if (h === 12 && m === 0) return "midday"; // clearer than "12pm" for people learning English
   const suffix = h >= 12 ? "pm" : "am";
   const hour = h % 12 === 0 ? 12 : h % 12;
   return m === 0 ? `${hour}${suffix}` : `${hour}.${String(m).padStart(2, "0")}${suffix}`;
@@ -220,13 +245,13 @@ export function sayWhatsOn(w: WhatsOn): { lead: string; detail: string } {
   const range = formatRange(w.session);
   if (w.kind === "now") {
     return {
-      lead: `It's ${dayName}. ${w.session.title} is on now.`,
+      lead: `It’s ${dayName}. ${w.session.title} is on now.`,
       detail: `${range}. Come in.`,
     };
   }
   if (w.kind === "later-today") {
     return {
-      lead: `It's ${dayName}. ${w.session.title} today.`,
+      lead: `It’s ${dayName}. ${w.session.title} today.`,
       detail: `${range}. Come in.`,
     };
   }

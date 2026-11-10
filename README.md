@@ -60,7 +60,7 @@ order: 2                              # lower comes first
 Their own words, one or two short sentences: what they do and what they want for the people who come in.
 ```
 
-Each person's words show in a speech bubble on the team page, with their name and role beneath and their photo above if there is one. Put photos in `public/photos/team/`. Only ever publish words the person wrote or approved. The three `sample-*.mdx` files are marked "Example profile"; delete them once real people are in.
+Each person's words show in a speech bubble on the team page, with their name and role beneath and their photo above if there is one. Put photos in `public/photos/team/`. Only ever publish words the person wrote or approved. The three `sample-*.mdx` files are placeholders: the page shows one of them, marked "Example profile", beside the real people. Delete them once real people are in.
 
 ### Success stories
 

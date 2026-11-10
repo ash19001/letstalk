@@ -2,8 +2,10 @@ import type { CSSProperties } from "react";
 import { Backdrop } from "@/components/Backdrop";
 import { BubbleButton } from "@/components/BubbleButton";
 import { WhatsOn } from "@/components/WhatsOn";
-import { DAY_NAMES, formatRange, place, sessions } from "@/lib/rota";
+import { DAY_NAMES, OPEN_DAYS, formatRange, place, sessions, weekInWords } from "@/lib/rota";
 import { lowerFirst } from "@/lib/text";
+
+const DAYS_IN_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven"];
 
 function WeekInShort({ className = "" }: { className?: string }) {
   return (
@@ -60,11 +62,8 @@ export function Hero() {
           nowClassName="text-white"
           fallback={
             <p className="hero-live font-semibold">
-              Four days a week, every week.
-              <span className="sr-only">
-                {" "}
-                Mondays women&rsquo;s group, Wednesdays English class and men&rsquo;s club, Thursdays community lunch, Sundays men&rsquo;s meditation.
-              </span>
+              {DAYS_IN_WORDS[OPEN_DAYS.length] ?? OPEN_DAYS.length} days a week, every week.
+              <span className="sr-only"> {weekInWords()}.</span>
             </p>
           }
         />

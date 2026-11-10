@@ -46,8 +46,20 @@ const COLS_FLUID = colsFor("minmax(0, 1fr)", "minmax(2.75rem, 0.42fr)");
  */
 export function Week() {
   const [now, setNow] = useState<{ day: Weekday; minutes: number } | null>(null);
+  const [scrollable, setScrollable] = useState(false);
   const scroller = useRef<HTMLDivElement>(null);
   const autoScrolled = useRef(false);
+
+  // The calendar is a keyboard stop (and a named region) only while it actually scrolls sideways
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const check = () => setScrollable(el.scrollWidth > el.clientWidth + 1);
+    check();
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     const tick = () => setNow(nowInRochdale());
@@ -56,8 +68,12 @@ export function Week() {
     return () => window.clearInterval(id);
   }, []);
 
-  /** Bring a day fully into view without leaving a sliver of another day beside the time column */
-  const showDay = useCallback((day: Weekday, smooth: boolean) => {
+  /**
+   * Bring a day fully into view without leaving a sliver of another day beside the time column.
+   * "start" puts the day right next to the times (a tapped day); "fit" uses the earliest day
+   * boundary from which the whole day shows, so the day before stays in view for context (opening at today).
+   */
+  const showDay = useCallback((day: Weekday, smooth: boolean, mode: "start" | "fit") => {
     const el = scroller.current;
     if (!el || el.scrollWidth <= el.clientWidth + 1) return;
     const days = el.querySelector<HTMLElement>(".cal-days");
@@ -70,11 +86,16 @@ export function Week() {
     const colEnd = colStart + col.getBoundingClientRect().width;
     const visible = el.clientWidth - axis.getBoundingClientRect().width;
     const max = el.scrollWidth - el.clientWidth;
-    // Always stop on a day boundary, so no sliver of another day sits beside the times:
-    // the earliest boundary from which the whole of this day can be seen, or else the latest one reachable.
+    // Stop on a day boundary, so no sliver of another day sits beside the times.
     const reachable = starts.filter((s) => s <= max + 0.5).sort((a, b) => a - b);
-    const target =
-      reachable.find((s) => s >= colEnd - visible - 4 && s <= colStart + 0.5) ?? reachable[reachable.length - 1] ?? 0;
+    const fits = (s: number) => s >= colEnd - visible - 4 && s <= colStart + 0.5;
+    let target: number;
+    if (mode === "start" && colStart <= max + 0.5) target = colStart;
+    else {
+      const boundary = reachable.find(fits);
+      // no boundary shows the whole day (the end of the week on a tablet): use the furthest scroll if that does
+      target = boundary ?? (max >= colEnd - visible - 4 ? max : (reachable[reachable.length - 1] ?? 0));
+    }
     const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     el.scrollTo({ left: target, behavior: smooth && !calm ? "smooth" : "instant" });
   }, []);
@@ -85,7 +106,7 @@ export function Week() {
     if (today === undefined || autoScrolled.current) return;
     autoScrolled.current = true;
     if ((scroller.current?.scrollLeft ?? 0) > 0) return;
-    showDay(today, false);
+    showDay(today, false, "fit");
   }, [today, showDay]);
 
   const nowAt = now && now.minutes >= START && now.minutes < END ? at(now.minutes) : null;
@@ -108,7 +129,7 @@ export function Week() {
             <li key={day}>
               <button
                 type="button"
-                onClick={() => showDay(day, true)}
+                onClick={() => showDay(day, true, "start")}
                 aria-controls="week-calendar"
                 className={`week-strip-day press ${closed ? "is-closed" : ""} ${today === day ? "is-today" : ""}`}
               >
@@ -124,13 +145,14 @@ export function Week() {
         })}
       </ul>
 
+      <div className="cal-frame">
       <div
         ref={scroller}
         id="week-calendar"
         className="cal-scroll"
-        role="region"
-        aria-label="The week, day by day"
-        tabIndex={0}
+        role={scrollable ? "region" : undefined}
+        aria-label={scrollable ? "The week, day by day" : undefined}
+        tabIndex={scrollable ? 0 : undefined}
       >
         <div
           className="cal"
@@ -195,7 +217,7 @@ export function Week() {
                               className={`cal-block bubble-l ${on ? "is-on" : ""}`}
                               style={{ "--from": at(from), "--to": at(to) } as CSSProperties}
                             >
-                              {on ? <p className="sr-only">On now:</p> : null}
+                              {on ? <p className="cal-block-on">On now</p> : null}
                               <p className="cal-block-title">{s.title}</p>
                               <p className="cal-block-time">{formatRange(s)}</p>
                               {s.note && to - from >= NOTE_MIN ? <p className="cal-block-note">{s.note}</p> : null}
@@ -213,6 +235,7 @@ export function Week() {
             })}
           </ol>
         </div>
+      </div>
       </div>
 
       {anyPlaceholder ? (

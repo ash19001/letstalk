@@ -68,6 +68,7 @@ const widths = {
 };
 const roadGroups = {};
 let drake = [];
+const drakeWays = [];
 for (const r of roads) {
   const t = r.tags || {};
   if (!r.geometry || !inFrame(r.geometry)) continue;
@@ -75,6 +76,7 @@ for (const r of roads) {
   const w = widths[t.highway];
   if (!w) continue;
   if (t.name === "Drake Street") drake.push(r.geometry);
+  if (t.name === "Drake Street") drakeWays.push(r);
   (roadGroups[w] ||= []).push(d(r.geometry));
 }
 const buildingPath = buildings
@@ -95,22 +97,38 @@ const railPath = lines
   .join("");
 const tramWays = tram.filter((e) => e.geometry && inFrame(e.geometry));
 const tramPath = tramWays.map((e) => d(e.geometry)).join("");
-// Highlight only the stretch people walk: from the town centre down to the bend where the
-// tram turns off for the station. West of the bend Drake Street stays an ordinary street.
-const WALK_SOUTH = 53.6127;
+// Highlight only the stretch people walk: from the town centre down to where the tram turns
+// off for the station (about SVG y 705). South and west of that Drake Street stays an ordinary street.
+const WALK_SOUTH = 53.613;
+// Where the street is a split carriageway, OpenStreetMap has two parallel one-way ways; each is
+// drawn thinner so the pair reads as one street of the same width as the rest.
+const latSpan = (g) => [Math.min(...g.map((p) => p.lat)), Math.max(...g.map((p) => p.lat))];
+const isSplit = (way) => {
+  if ((way.tags || {}).oneway !== "yes") return false;
+  const [a0, a1] = latSpan(way.geometry);
+  return drakeWays.some((o) => {
+    if (o === way || (o.tags || {}).oneway !== "yes") return false;
+    const [b0, b1] = latSpan(o.geometry);
+    const overlap = Math.min(a1, b1) - Math.max(a0, b0);
+    return overlap > 0.5 * Math.max(a1 - a0, 1e-9);
+  });
+};
 const walked = [];
-for (const g of drake) {
+const walkedSplit = [];
+for (const way of drakeWays) {
+  const into = isSplit(way) ? walkedSplit : walked;
   let run = [];
-  for (const p of g) {
+  for (const p of way.geometry) {
     if (p.lat >= WALK_SOUTH) run.push(p);
     else {
-      if (run.length > 1) walked.push(run);
+      if (run.length > 1) into.push(run);
       run = [];
     }
   }
-  if (run.length > 1) walked.push(run);
+  if (run.length > 1) into.push(run);
 }
 const drakePath = walked.map((g) => d(g)).join("");
+const drakeSplitPath = walkedSplit.map((g) => d(g)).join("");
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VB} ${H}" width="${VB}" height="${H}">
 <rect width="${VB}" height="${H}" fill="#f1eee9"/>
@@ -124,6 +142,7 @@ ${Object.entries(roadGroups)
 <path d="${railPath}" fill="none" stroke="#8d857c" stroke-width="5" stroke-linecap="butt"/>
 <path d="${railPath}" fill="none" stroke="#f1eee9" stroke-width="2.4" stroke-dasharray="9 9"/>
 <path d="${drakePath}" fill="none" stroke="#f2602f" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="${drakeSplitPath}" fill="none" stroke="#f2602f" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="${tramPath}" fill="none" stroke="#161412" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"/>
 </svg>`;
 fs.writeFileSync(outSvg, svg);
@@ -201,7 +220,6 @@ const ang = (Math.atan2(py(seg.b.lat) - py(seg.a.lat), px(seg.b.lon) - px(seg.a.
 const labelAngle = ang > 90 ? ang - 180 : ang < -90 ? ang + 180 : ang;
 
 const out = {
-  aspect: `${VB} / ${H}`,
   pin: pct(pts.pin.lat, pts.pin.lon),
   station: pct(pts.station.lat, pts.station.lon),
   interchange: pct(pts.interchange.lat, pts.interchange.lon),

@@ -18,7 +18,7 @@ The centre is a former shop at 74 Drake Street with an orange fascia where "Talk
 
 The page alternates grounds so each object sits on its own: white (hero), white (week), black (receipt), white (map), orange (stories), white (news), black (list), orange (sign), black (links). Two orange fields never touch: on /team the orange band of people's words is followed by a white gap before the sign.
 
-The inner pages use the same pieces: a page intro (title, one-line lead, one action, one duotone picture in a bubble), then the team as speech bubbles on orange (/team), the news card and rows (/announcements), and an orange header bubble with the date and title on each post.
+The inner pages use the same pieces: a page intro (title, one-line lead, one action, one duotone picture in a bubble), then the team as speech bubbles on orange (/team: real people in wide white bubbles, at most one example profile in a narrow black one, then one line about the psychologist and psychiatrist), the news card and rows (/announcements), and an orange header bubble with the date and title on each post.
 
 ## Colour
 
@@ -36,11 +36,11 @@ The inner pages use the same pieces: a page intro (title, one-line lead, one act
 
 Text on orange is ink, never white (white on `#f2602f` fails contrast for body text); the one exception is the hero's live line, which is large. No gradients anywhere; the only blend is the photo duotone.
 
-Focus: a 3px ring, offset 3px, in `--focus`, which is orange by default and ink on orange surfaces (stories, the sign, the day strip, the news card). Bubble buttons draw their bubble on a layer behind the label so the ring is never clipped, and focus swaps their colour exactly as hover does; the news card turns black on focus as on hover.
+Focus: a 3px ring, offset 3px, in `--focus`, which is orange by default and ink on orange surfaces (stories, the sign, the day strip, the news card, and the header while it sits on the hero's bubble from 768px, where the black Call button also turns white rather than orange on hover and focus). The sideways calendar is a keyboard stop only while it scrolls; its ring is drawn on the frame around it, above the sticky time column. Bubble buttons draw their bubble on a layer behind the label so the ring is never clipped, and focus swaps their colour exactly as hover does; the news card turns black on focus as on hover.
 
 ## Type
 
-Roundo 400/500/600 (self-hosted) for everything. IBM Plex Mono 500/600 only on the receipt, because a receipt is printed in a monospace face.
+Roundo 400/500/600 (self-hosted) for everything. IBM Plex Mono 500/600 only on the receipt, because a receipt is printed in a monospace face. It is declared in `Free.tsx` without preloading (the receipt is below the fold), and `.receipt` reads `var(--font-plex-mono)` directly, since that variable exists only on the receipt's section.
 
 | Token | Size | Use |
 |---|---|---|
@@ -70,12 +70,12 @@ The calendar is a grid of a time column plus seven days (open days `1fr`, closed
 
 ## Pictures
 
-Four found, openly licensed photos of Rochdale (credits in `assets/credits.json` and in the footer of every page), shown in an orange-and-black duotone (grayscale under an orange multiply layer, with a per-picture `--lift` to brighten dark ones) that lifts to full colour on hover. Never presented as the centre or its people. The map is an SVG drawn from OpenStreetMap data (see `docs/map.md`); only the stretch of Drake Street people walk is orange. Labels, walking times and the pin are HTML laid over it, placed beside their points so the pin never covers them.
+Four found, openly licensed photos of Rochdale (credits in `assets/credits.json` and in the footer of every page), shown in an orange-and-black duotone (grayscale under an orange multiply layer, with a per-picture `--lift` to brighten dark ones) that lifts to full colour on hover. Never presented as the centre or its people. The map is an SVG drawn from OpenStreetMap data (see `docs/map.md`); only the stretch of Drake Street people walk is orange, from the Interchange to where the tram turns off for the station, and the two halves of a split carriageway are drawn thinner so the street keeps one width. The street name sits on a patch of the street's own orange so the tram rails never cross it. Labels, walking times and the pin are HTML laid over it, placed beside their points so the pin never covers them.
 
 ## Motion
 
 - Hero: unchanged load sequence (bubble wipe, headline lines rising).
-- Receipt: a scroll-driven animation timed to the till slot (a named view timeline on the slot, shared through `timeline-scope`) raises the paper out of it, header first: it starts when the slot comes on screen and ends when the slot is a quarter of the way up. Static in browsers without scroll timelines and under reduced motion.
+- Receipt: a scroll-driven animation timed to the till slot (a named view timeline on the slot, shared through `timeline-scope`) raises the paper out of it, header first: it starts when the slot comes on screen and ends when the slot is a quarter of the way up (a tenth on screens under 880px tall, so the whole receipt is in view when it finishes; under 720px it simply stands printed). Static in browsers without scroll timelines and under reduced motion.
 - Calendar: the "now" marker pulses three times when it appears; reduced motion stops it. The now line runs behind the session blocks, never through their words.
 - Photos: grayscale to colour on hover, 500ms ease-out.
 - Story bubbles: straighten on hover, 450ms ease-out.
@@ -89,7 +89,7 @@ Curves: `--ease-out` cubic-bezier(0.23, 1, 0.32, 1), `--ease-in-out` cubic-bezie
 All read the clock in Rochdale (`nowInRochdale()` in `src/lib/rota.ts`, Europe/London) after the page loads, so the server render is the plain week:
 
 - the hero's line (what's on now or next),
-- the calendar's today column, "Now" marker and "On now" block,
+- the calendar's today column, "Now" marker and "On now" block (black, with the words "On now" and a small orange square),
 - the receipt's printed date and time.
 
 ## Things this site does not do
