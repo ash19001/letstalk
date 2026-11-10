@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T18:00:00.000Z",
+  "title": "Design System: Let's Talk, Rochdale",
+  "extensions": {
+    "colorMeta": {
+      "field": {
+        "role": "primary",
+        "displayName": "Sign Orange",
+        "canonical": "#f2602f",
+        "tonalRamp": [
+          "oklch(22% 0.07 38)",
+          "oklch(34% 0.12 38)",
+          "oklch(46% 0.17 38)",
+          "oklch(58% 0.20 38)",
+          "oklch(67% 0.20 38)",
+          "oklch(78% 0.13 38)",
+          "oklch(88% 0.07 38)",
+          "oklch(95% 0.03 38)"
+        ]
+      },
+      "field-ink": {
+        "role": "primary",
+        "displayName": "Ink on Orange",
+        "canonical": "#161412",
+        "tonalRamp": [
+          "oklch(15% 0.005 60)",
+          "oklch(25% 0.005 60)",
+          "oklch(35% 0.005 60)",
+          "oklch(45% 0.005 60)",
+          "oklch(55% 0.005 60)",
+          "oklch(70% 0.004 60)",
+          "oklch(85% 0.003 60)",
+          "oklch(95% 0.002 60)"
+        ]
+      },
+      "field-soft": {
+        "role": "secondary",
+        "displayName": "Coupon Soft",
+        "canonical": "#ffd9c9",
+        "tonalRamp": [
+          "oklch(25% 0.05 45)",
+          "oklch(40% 0.08 45)",
+          "oklch(55% 0.10 45)",
+          "oklch(68% 0.10 45)",
+          "oklch(78% 0.08 45)",
+          "oklch(86% 0.06 45)",
+          "oklch(91% 0.05 45)",
+          "oklch(96% 0.02 45)"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(30% 0 0)",
+          "oklch(45% 0 0)",
+          "oklch(60% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(88% 0 0)",
+          "oklch(96% 0 0)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Shop Grey",
+        "canonical": "#f3f2f0",
+        "tonalRamp": [
+          "oklch(18% 0.004 80)",
+          "oklch(30% 0.004 80)",
+          "oklch(45% 0.004 80)",
+          "oklch(60% 0.004 80)",
+          "oklch(75% 0.004 80)",
+          "oklch(86% 0.004 80)",
+          "oklch(92% 0.003 80)",
+          "oklch(96% 0.003 80)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#161412",
+        "tonalRamp": [
+          "oklch(15% 0.005 60)",
+          "oklch(25% 0.005 60)",
+          "oklch(35% 0.005 60)",
+          "oklch(45% 0.005 60)",
+          "oklch(55% 0.005 60)",
+          "oklch(70% 0.004 60)",
+          "oklch(85% 0.003 60)",
+          "oklch(95% 0.002 60)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#5c5651",
+        "tonalRamp": [
+          "oklch(18% 0.008 60)",
+          "oklch(28% 0.008 60)",
+          "oklch(36% 0.008 60)",
+          "oklch(44% 0.008 60)",
+          "oklch(55% 0.008 60)",
+          "oklch(68% 0.006 60)",
+          "oklch(82% 0.004 60)",
+          "oklch(94% 0.002 60)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero headline, secondary page titles, the phone number in the closing white bubble and the footer mark. Cap 6rem; 11.5vw under 768px."
+      },
+      "head": {
+        "displayName": "Head",
+        "purpose": "Every section title; the announcement article title at 600; the hero's live line from 1024px."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The hero's live line below 1024px (600) and its detail (500), page leads, quotes, primary button labels (600), list and folder titles, article prose."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text, the rota, nav links (500), captions (muted), small buttons (600). Prose capped at 62ch."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Defined as the fifth step; unused on shipped pages. Reserve for legal or credit lines; never add a sixth size."
+      },
+      "hero-live": {
+        "displayName": "Live line",
+        "purpose": "Responsive voice of the bubble: lead step (line-height 1.15, -0.02em) below 1024px, head step (1.05, -0.025em) from 1024px."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Press transform and short rises on load (Emil Kowalski's interface curve)."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "The hero bubble's 1100ms wipe in from the right edge."
+      },
+      {
+        "name": "ease-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Headline lines rising from their baselines over 800ms."
+      },
+      {
+        "name": "ease-drawer",
+        "value": "cubic-bezier(0.32, 0.72, 0, 1)",
+        "purpose": "Reserved for a sheet or drawer; defined, unused."
+      },
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(0.33, 1, 0.68, 1)",
+        "purpose": "Reserved; defined, unused."
+      },
+      {
+        "name": "t-press",
+        "value": "140ms",
+        "purpose": "Scale to 0.97 on :active."
+      },
+      {
+        "name": "t-hover",
+        "value": "180ms",
+        "purpose": "Background, text and underline colour swaps on hover."
+      },
+      {
+        "name": "t-ui",
+        "value": "240ms",
+        "purpose": "Reserved for interface state changes; unused."
+      },
+      {
+        "name": "t-reveal",
+        "value": "800ms",
+        "purpose": "Headline line rise on load."
+      },
+      {
+        "name": "t-open",
+        "value": "1100ms",
+        "purpose": "The hero bubble wipe."
+      },
+      {
+        "name": "load-line",
+        "value": "translateY(105%) -> none, 800ms ease-expo, delay 100ms + 90ms * --i",
+        "purpose": "Each headline line rises inside a clipped line box."
+      },
+      {
+        "name": "load-rise",
+        "value": "opacity 0, translateY(12px) -> opacity 1, none; 500ms ease-out, delay --d",
+        "purpose": "Copy, buttons, pictures and list items settle after the headline."
+      },
+      {
+        "name": "load-open",
+        "value": "clip-path inset(0 0 0 100%) -> inset(0), 1100ms ease-in-out, delay 120ms",
+        "purpose": "The orange hero bubble wipes in from the right edge."
+      },
+      {
+        "name": "drift",
+        "value": "translateY(-4%) scale(1.1) -> translateY(4%) scale(1.1), animation-timeline: view()",
+        "purpose": "A 4% scroll-locked parallax on two photographs; the only scroll-linked motion. Progressive enhancement."
+      },
+      {
+        "name": "frame-crossfade",
+        "value": "opacity 600ms ease, hold 3600ms",
+        "purpose": "The 'Our corner' picture frame changes its contents; tap advances and pauses the timer."
+      },
+      {
+        "name": "drift-soft",
+        "value": "translateY(6%) -> translateY(-6%), linear, animation-timeline: view(), entry 0% to exit 100%",
+        "purpose": "Each backdrop bubble drifts a little with the scroll; progressive enhancement, no-preference only."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "2xl",
+        "value": "1536px"
+      },
+      {
+        "name": "hero-tablet",
+        "value": "768px to 1023px: bubble from 54%, 60vw wide; copy column calc(54vw - inset - 1rem)"
+      }
+    ],
+    "shapes": [
+      {
+        "name": "bubble",
+        "value": "clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w, 28px)) calc(100% - var(--tail-h, 24px)), 0 calc(100% - var(--tail-h, 24px)))",
+        "purpose": "The one shape, tail at the bottom right like the sign."
+      },
+      {
+        "name": "bubble-l",
+        "value": "clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tail-h, 24px)), var(--tail-w, 28px) calc(100% - var(--tail-h, 24px)), 0 100%)",
+        "purpose": "Tail at the bottom left: the hero field and folder tabs point left."
+      },
+      {
+        "name": "dot",
+        "value": "0.7em square, clip-path: polygon(0 0, 100% 0, 100% 100%, 72% 72%, 0 72%)",
+        "purpose": "The bubble at text size as a list bullet."
+      },
+      {
+        "name": "tail-giant",
+        "value": "90x80, 72x64, 64x56",
+        "purpose": "Hero field, closing white bubble, footer mark and quote card."
+      },
+      {
+        "name": "tail-medium",
+        "value": "56x48, 48x40, 40x36",
+        "purpose": "Photo masks and the coupon."
+      },
+      {
+        "name": "tail-small",
+        "value": "18x14, 18x10, 16x14, 14x12",
+        "purpose": "Buttons, team initial, day bullets and folder tabs."
+      },
+      {
+        "name": "tail-faint",
+        "value": "80x70, 34-46vw wide, opacity 0.1-0.12",
+        "purpose": "The Backdrop bubble behind white sections; shape only, never content."
+      }
+    ],
+    "focus": {
+      "value": "outline: 3px solid var(--field); outline-offset: 3px",
+      "purpose": "Global :focus-visible ring in the sign's orange."
+    },
+    "content": {
+      "model": "MDX files with gray-matter front matter: content/announcements/*.mdx (title, date, summary, image?, imageAlt?, sample?), content/team/*.mdx (name, role, order, image?, sample?), content/stories/*.mdx (name, session, quote, image?, imageAlt?, sample?). Announcements sort newest first; team by order then name.",
+      "placeholders": "sample: true marks invented content; session times carry placeholderTime in src/lib/rota.ts and the rota prints 'Times are being confirmed' while any remain; team members without a picture get an orange bubble with their initial and the page says photographs are on their way. Sample announcements show 'Sample post' beside their date tab on the home noticeboard.",
+      "pictures": "Found pictures of Rochdale live in public/images/world with provenance in assets/credits.json and the credit line in the footer (Credits.tsx). Share-alike images must not be recoloured or combined."
+    },
+    "stateColor": {
+      "name": "live-now",
+      "value": "color: #ffffff on var(--field)",
+      "purpose": "The one reserved colour move: the hero's live line turns white only while a session is on right now (WhatsOn nowClassName=\"text-white\")."
+    },
+    "cascade": {
+      "value": "@layer base",
+      "purpose": "Element defaults (body, ::selection, :focus-visible, p, h1-h3, a, img, button, summary) sit in @layer base so Tailwind utilities win over them."
+    },
+    "overflow": {
+      "value": "html { overflow-x: clip }; backdrop parents are relative isolate overflow-x-clip",
+      "purpose": "Backdrop overhangs never widen the document."
+    },
+    "tint": {
+      "name": "backdrop-on-white",
+      "value": "#fdeee7 at most (field at 0.12 over bg)",
+      "purpose": "The strongest the ground gets behind a backdrop; running text keeps full ink contrast."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action style: an ink bubble with a 600 lead label; hovers to orange, presses to 0.97.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#week\">When to come</a>",
+      "css": ".ds-btn-primary { --tail-w: 18px; --tail-h: 14px; display: inline-flex; align-items: center; background: var(--ink, #161412); color: #fff; font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-lead, 1.5rem); font-weight: 600; line-height: 1; letter-spacing: -0.01em; text-decoration: none; padding: 1rem 1.75rem calc(1rem + var(--tail-h)); border: 0; border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, color 180ms ease; } .ds-btn-primary:hover { background: var(--field, #f2602f); color: var(--ink, #161412); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 3px solid var(--field, #f2602f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Small Button",
+      "kind": "button",
+      "refersTo": "button-primary-small",
+      "description": "The header's call button: the same bubble at body size with a 10px tail.",
+      "html": "<a class=\"ds-btn-small\" href=\"tel:07930606926\">Call 07930 606 926</a>",
+      "css": ".ds-btn-small { --tail-w: 18px; --tail-h: 10px; display: inline-flex; align-items: center; background: var(--ink, #161412); color: #fff; font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-body, 1.125rem); font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; padding: 0.625rem 1rem calc(0.625rem + var(--tail-h)); border: 0; border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, color 180ms ease; } .ds-btn-small:hover { background: var(--field, #f2602f); color: var(--ink, #161412); } .ds-btn-small:active { transform: scale(0.97); } .ds-btn-small:focus-visible { outline: 3px solid var(--field, #f2602f); outline-offset: 3px; }"
+    },
+    {
+      "name": "White Button",
+      "kind": "button",
+      "refersTo": "button-white",
+      "description": "The button on the ink footer: white bubble, ink text, hovers to ink.",
+      "html": "<div class=\"ds-on-ink\"><a class=\"ds-btn-white\" href=\"tel:07930606926\">Call us</a></div>",
+      "css": ".ds-on-ink { background: var(--ink, #161412); padding: 1.5rem; } .ds-btn-white { --tail-w: 18px; --tail-h: 10px; display: inline-flex; align-items: center; background: #fff; color: var(--ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-body, 1.125rem); font-weight: 600; line-height: 1; text-decoration: none; padding: 0.625rem 1rem calc(0.625rem + var(--tail-h)); border: 0; border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, color 180ms ease; } .ds-btn-white:hover { background: var(--ink, #161412); color: #fff; } .ds-btn-white:active { transform: scale(0.97); } .ds-btn-white:focus-visible { outline: 3px solid var(--field, #f2602f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Link",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Text link: the underline is held transparent and revealed on hover; colour, never opacity.",
+      "html": "<a class=\"ds-link\" href=\"/team\">Team</a>",
+      "css": ".ds-link { color: var(--ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-body, 1.125rem); font-weight: 500; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.18em; text-decoration-thickness: 0.07em; transition: text-decoration-color 180ms ease; } .ds-link:hover { text-decoration-color: currentColor; } .ds-link:focus-visible { outline: 3px solid var(--field, #f2602f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Day Bullet",
+      "kind": "chip",
+      "refersTo": "day-bullet",
+      "description": "A 64px orange bubble naming the day in the rota; grey with muted text when closed.",
+      "html": "<span class=\"ds-day\">Thu</span> <span class=\"ds-day ds-day--closed\">Fri</span>",
+      "css": ".ds-day { --tail-w: 14px; --tail-h: 12px; display: inline-flex; width: 64px; height: 64px; align-items: center; justify-content: center; padding-bottom: var(--tail-h); background: var(--field, #f2602f); color: var(--field-ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-body, 1.125rem); font-weight: 600; clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); } .ds-day--closed { background: var(--surface, #f3f2f0); color: var(--muted, #5c5651); }"
+    },
+    {
+      "name": "Folder Tab",
+      "kind": "chip",
+      "refersTo": "folder-tab",
+      "description": "The left-tailed date tab that leads each announcement band, in the opposite colour to its band; the title follows once in the body.",
+      "html": "<div class=\"ds-band\"><span class=\"ds-tab\">5 November 2026</span><span class=\"ds-band-date\">Sample post</span></div>",
+      "css": ".ds-band { display: flex; height: 72px; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0 1.5rem; background: var(--field, #f2602f); color: var(--field-ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); font-size: var(--step-body, 1.125rem); } .ds-tab { --tail-w: 14px; --tail-h: 12px; display: inline-flex; height: 56px; max-width: 75%; align-items: center; padding: 0 1.25rem var(--tail-h); background: var(--ink, #161412); color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tail-h)), var(--tail-w) calc(100% - var(--tail-h)), 0 100%); } .ds-band-date { font-weight: 500; flex-shrink: 0; }"
+    },
+    {
+      "name": "Picture Mask",
+      "kind": "card",
+      "refersTo": "picture-mask",
+      "description": "Every photograph sits inside a bubble on the grey surface; never a plain rectangle.",
+      "html": "<figure class=\"ds-mask-wrap\"><div class=\"ds-mask\"></div><figcaption class=\"ds-caption\">Drake Street, where you will find us.</figcaption></figure>",
+      "css": ".ds-mask-wrap { margin: 0; width: 320px; font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); } .ds-mask { --tail-w: 48px; --tail-h: 40px; aspect-ratio: 16 / 10; background: var(--surface, #f3f2f0); clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); } .ds-caption { margin-top: 1rem; font-size: var(--step-body, 1.125rem); color: var(--muted, #5c5651); }"
+    },
+    {
+      "name": "Coupon",
+      "kind": "card",
+      "refersTo": "coupon-card",
+      "description": "An orange bubble card with a dashed perforation, pale fact rows and an ink directions bar; the only place #ffd9c9 and a drawn line appear.",
+      "html": "<div class=\"ds-coupon\"><div class=\"ds-coupon-left\"><h2 class=\"ds-coupon-title\">Cut this out</h2><p class=\"ds-coupon-text\">Everything you need to find us, on one card.</p></div><div class=\"ds-coupon-right\"><ul class=\"ds-coupon-list\"><li class=\"ds-coupon-row\">74 Drake Street, Rochdale OL16 1PQ</li><li class=\"ds-coupon-row\">Monday, Wednesday, Thursday and Sunday</li><li class=\"ds-coupon-row\">07930 606 926</li></ul><a class=\"ds-coupon-bar\" href=\"#\">Get directions</a></div></div>",
+      "css": ".ds-coupon { --tail-w: 48px; --tail-h: 40px; display: grid; grid-template-columns: 1fr 1fr; width: 640px; background: var(--field, #f2602f); color: var(--field-ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); } .ds-coupon-left { display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; } .ds-coupon-title { margin: 0; font-size: var(--step-head, 2.5rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.025em; } .ds-coupon-text { margin: 2.5rem 0 0; max-width: 30ch; font-size: var(--step-body, 1.125rem); line-height: 1.5; } .ds-coupon-right { border-left: 5px dashed #fff; padding: 2rem 2rem calc(2rem + var(--tail-h)); } .ds-coupon-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; } .ds-coupon-row { display: flex; min-height: 52px; align-items: center; padding: 0 1.25rem; background: var(--field-soft, #ffd9c9); font-size: var(--step-body, 1.125rem); font-weight: 500; } .ds-coupon-bar { display: flex; height: 56px; margin-top: 10px; align-items: center; justify-content: center; background: var(--ink, #161412); color: #fff; font-size: var(--step-body, 1.125rem); font-weight: 600; text-decoration: none; transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, color 180ms ease; } .ds-coupon-bar:hover { background: #fff; color: var(--ink, #161412); } .ds-coupon-bar:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "nav-header",
+      "description": "88px row: wordmark, three reveal-underline links, the small ink call bubble.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"/\">Let’s Talk</a><nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"/#week\">The week</a><a class=\"ds-nav-link\" href=\"/team\">Team</a><a class=\"ds-nav-link\" href=\"/announcements\">Announcements</a><a class=\"ds-nav-call\" href=\"tel:07930606926\">Call 07930 606 926</a></nav></header>",
+      "css": ".ds-header { display: flex; height: 88px; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 2rem; background: #fff; color: var(--ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); } .ds-wordmark { color: inherit; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; } .ds-nav { display: flex; align-items: center; gap: 2.25rem; font-size: var(--step-body, 1.125rem); font-weight: 500; } .ds-nav-link { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.18em; text-decoration-thickness: 0.07em; transition: text-decoration-color 180ms ease; white-space: nowrap; } .ds-nav-link:hover { text-decoration-color: currentColor; } .ds-nav-call { --tail-w: 18px; --tail-h: 10px; display: inline-flex; align-items: center; background: var(--ink, #161412); color: #fff; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; padding: 0.625rem 1rem calc(0.625rem + var(--tail-h)); clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - var(--tail-w)) calc(100% - var(--tail-h)), 0 calc(100% - var(--tail-h))); transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms ease, color 180ms ease; } .ds-nav-call:hover { background: var(--field, #f2602f); color: var(--ink, #161412); } .ds-nav-call:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Speaking Bubble",
+      "kind": "custom",
+      "refersTo": "hero-bubble",
+      "description": "The giant left-tailed orange field that says what's on today, in ink; white only while a session is on now.",
+      "html": "<div class=\"ds-say\"><p class=\"ds-say-lead ds-say-lead--now\">It’s Thursday. Community lunch is on now.</p><p class=\"ds-say-detail\">12.30pm till 2pm. Come in.</p></div>",
+      "css": ".ds-say { --tail-w: 90px; --tail-h: 80px; width: 520px; min-height: 360px; padding: 4rem 3rem calc(3rem + var(--tail-h)); background: var(--field, #f2602f); color: var(--field-ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tail-h)), var(--tail-w) calc(100% - var(--tail-h)), 0 100%); } .ds-say-lead { margin: 0; font-size: var(--step-head, 2.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.025em; } .ds-say-lead--now { color: #fff; } .ds-say-detail { margin: 1rem 0 0; font-size: var(--step-lead, 1.5rem); font-weight: 500; line-height: 1.2; }"
+    },
+    {
+      "name": "Backdrop",
+      "kind": "custom",
+      "refersTo": "backdrop",
+      "description": "A faint orange speech bubble behind a white section at 0.12 opacity (0.1 on the hero, corner and coupon); shape only, hidden from assistive tech, drifting 6% with the scroll.",
+      "html": "<section class=\"ds-backdrop-host\"><div class=\"ds-backdrop\" aria-hidden=\"true\"></div><h2 class=\"ds-backdrop-title\">The week</h2><p class=\"ds-backdrop-text\">Four days, every week.</p></section>",
+      "css": ".ds-backdrop-host { position: relative; isolation: isolate; overflow-x: clip; width: 640px; min-height: 280px; padding: 3rem 2rem; background: var(--bg, #ffffff); color: var(--ink, #161412); font-family: var(--font-roundo, 'Segoe UI', system-ui, sans-serif); } .ds-backdrop { --tail-w: 80px; --tail-h: 70px; position: absolute; z-index: -1; pointer-events: none; right: -12%; top: 6%; width: 46%; height: 72%; background: var(--field, #f2602f); opacity: 0.12; clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--tail-h)), var(--tail-w) calc(100% - var(--tail-h)), 0 100%); } .ds-backdrop-title { margin: 0; font-size: var(--step-head, 2.5rem); font-weight: 500; line-height: 1.05; letter-spacing: -0.025em; } .ds-backdrop-text { margin: 1rem 0 0; font-size: var(--step-body, 1.125rem); line-height: 1.5; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sign Speaks",
+    "overview": "The whole site is one object from the shop front at 74 Drake Street: the square-cornered speech bubble that holds the word \"Talk\" on the orange fascia. That bubble is the only shape the site has. It is cut from flat colour at three scales (a giant field, a medium mask or tab, a small button or bullet), and at the largest scale it literally speaks: the hero's orange bubble tells the visitor what is on today, computed from the clock in Rochdale and refreshed each minute, and without script it lists the week; while a session is on right now the live line turns white, the one colour move the site reserves. Behind the white sections the same bubble returns faintly, at 10 to 12% opacity, as quiet voices behind the room. Nothing else decorates the page. There are no lines, no shadows, no gradients, no icons, no illustration; the orange is never trim, it is always a whole field you could paint a wall with.\n\nDensity is generous and phone-first. One pair of margins (8vw, clamped) frames every section; sections are separated by a single large gap rather than by rules or background changes. Type is Roundo at three weights, five sizes in all, with large plain-English sentences a new English speaker can read on a phone. The ground is white and the ink is near-black; the photographs are found pictures of Rochdale (not stock), always cropped by the bubble. Motion is a load sequence and nothing more: the hero bubble wipes in from the right edge, headline lines rise from their baselines, and after that the page is still; nothing fades in on scroll.\n\nThe build refused the photo hero with headline and button, three service blocks, a timetable table, and the twenty \"vibe-coded\" tells listed in PRODUCT.md (purple gradients, gradient text, kickers above headlines, icon rows, glass, coloured-border cards, Inter, fade-on-scroll, hover-fade buttons, serif italic accents).",
+    "keyCharacteristics": [
+      "One motif: the sign's square-cornered bubble with a right-angled tail at a bottom corner, at giant, medium and small scales.",
+      "Orange committed as whole flat fields (hero, closing field, footer mark, folder bands, quote card, coupon), never as an accent.",
+      "Faint backdrop bubbles (the same orange at 0.1 to 0.12 opacity, shape only) behind the white sections, drifting a little with the scroll.",
+      "White ground, near-black ink, one grey surface step; #ffd9c9 lives only inside an orange card.",
+      "Roundo 400/500/600, five type steps, one display size.",
+      "Square corners everywhere; no lines, shadows, gradients, icons or illustration.",
+      "Motion is a one-time load sequence plus press and colour feedback; no scroll-triggered fade-ins.",
+      "Content is MDX files; every sample is flagged `sample: true` and the UI says so."
+    ],
+    "rules": [
+      {
+        "name": "The Whole Field Rule",
+        "body": "Orange is a surface, not an accent. If an element is orange it is a filled bubble or a full-bleed band, solid or faint; the site has no orange borders, underlines, icons, badges or text.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Colour Move Rule",
+        "body": "The only state change expressed in colour is the live line turning white while a session is on now. Every other state is ink on orange; do not spend white on orange anywhere else.",
+        "section": "colors"
+      },
+      {
+        "name": "The Inside-the-Card Rule",
+        "body": "#ffd9c9 may only sit inside an orange card (today, the coupon's fact rows). On white it does not exist.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Band Rule",
+        "body": "Bands alternate orange and ink (the announcement folders); the tab on each band takes the other colour. There is no third band colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Five Steps Rule",
+        "body": "Text is set only with the five step tokens (display, head, lead, body, small); the footer mark is display, not a sixth size. The live line is the one text that changes step with the viewport (lead below 1024px, head from 1024px), because the bubble that carries it changes width.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight Means Emphasis Rule",
+        "body": "Hierarchy within a step comes from weight (600 for the thing that speaks or is tapped, 500 for a name or nav link, 400 for prose), never from colour, caps, size tweaks or italics.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plain Sentence Rule",
+        "body": "Headings are balanced (`text-wrap: balance`), paragraphs pretty-wrapped, hyphenation off. Headings are short plain sentences (\"Come in. Let's talk.\", \"Cut this out\"), never kickers, eyebrows or labels above them.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "Nothing casts a shadow, at rest or on hover. Press feedback is a scale, hover feedback is a colour swap; neither lifts the element.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Cut Not Drawn Rule",
+        "body": "Shape comes from `clip-path`, never from borders or outlines. If you need to separate two things, give one of them a filled field or leave air; do not draw a line.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Four Scales Rule",
+        "body": "A new element that needs a container is a bubble at giant, medium or small, with the tail size from the matching band above; the faint-behind scale is decoration only and never holds content. Do not invent a fifth scale or a tail that is not right-angled.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Tail Points Rule",
+        "body": "The default tail is bottom right like the sign; use the left tail (`bubble-l`) only when the bubble should point at something to its left, as the hero points at the headline and the folder tabs point at their band.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do cut every container, button, picture and bullet to the bubble, square-cornered with a right-angled tail, at one of the three scales.",
+      "Do use orange only as a whole field with ink text on it; put #ffd9c9 only inside an orange card; reserve white on orange for the live line while a session is on.",
+      "Do set text with the five steps only, Roundo 400/500/600, headings in short plain sentences.",
+      "Do keep one pair of margins (`--inset`) and one section gap (`--section`); separate sections with air, not rules or background changes.",
+      "Do give press feedback as scale 0.97 and hover feedback as a colour swap; keep the focus ring the 3px orange outline.",
+      "Do keep motion to the one-time load sequence under `html.js` and no-preference; the page must be whole without script.",
+      "Do keep backdrop bubbles shape-only, orange at 0.1 to 0.12 opacity, one per white section, overhanging an edge inside a `relative isolate overflow-x-clip` parent.",
+      "Do keep tap targets at 44px or more and the phone layout single-column with the bubble filling the lower 44svh of the hero.",
+      "Do keep content as MDX files in `content/announcements`, `content/team` and `content/stories` with `sample: true` on anything invented, and keep found pictures in `public/images/world` with their credits in `assets/credits.json` and the footer."
+    ],
+    "donts": [
+      "Don't use orange as an accent: no orange borders, underlines, icons, badges, tints or text.",
+      "Don't draw lines, shadows, gradients, blur, glass or coloured-border cards; the coupon's perforation is the only drawn line.",
+      "Don't use icons, icon fonts, glyph rows, illustration or stock photography.",
+      "Don't add kickers, eyebrows, labels above headlines, uppercase tracking, italics, serif accents or a second typeface.",
+      "Don't fade, slide or count anything in on scroll, don't make bands sticky, and don't fade a button on hover.",
+      "Don't add a sixth type size (the page holds five: 19 / 24 / 30 / 56 / 92 at 1440), a fifth bubble scale, a rounded corner or a curved tail.",
+      "Don't put a backdrop on an orange, ink or white-band section, raise it above 0.14 opacity, put text in it, or let it widen the page.",
+      "Don't put white text on orange (except the live line while a session is on), muted text on orange, or #ffd9c9 on white.",
+      "Don't use referral, clinic or charity language, emoji in headings, or em-dash habits in copy."
+    ]
+  }
+}

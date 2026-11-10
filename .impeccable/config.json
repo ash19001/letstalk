@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "nunito",
+        "createdAt": "2026-11-05T18:25:00.150Z",
+        "reason": "Claude decided: the .impeccable/decision/*.html sketches are decision-page fixtures, not shipped pages; the app self-hosts Roundo, which standalone sketch files cannot load"
+      }
+    ]
+  }
+}

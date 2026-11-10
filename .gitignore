@@ -22,13 +22,16 @@
 
 # misc
 .DS_Store
+Thumbs.db
+desktop.ini
 *.pem
 
-# debug
+# debug and logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -39,3 +42,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editors: personal settings stay local, shared ones can be committed
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Claude Code: the project skills in .claude/skills are shared; personal settings and worktrees are not
+.claude/settings.local.json
+.claude/worktrees/
+
+# design tooling: screenshots, sketches and caches are regenerated; the notes are kept
+# (.impeccable/questions/ ignores itself)
+.taste-skill/inspect*/
+.impeccable/review/
+.impeccable/decision/
+.impeccable/hook.cache.json
+
+# found pictures as downloaded; the copies the site uses live in public/images/world,
+# and assets/credits.json records where each one came from
+/assets/*
+!/assets/credits.json
+
+# downloaded OpenStreetMap data for the map generator (see docs/map.md)
+/scripts/map/*.json
